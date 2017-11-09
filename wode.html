@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">我的</h1>
+			<a href="#" class="mui-pull-right shezhi"><img src="img/shezhi (2).png" alt="" /></a>
+		</header>
+		<div class="mui-content tubiao shezhi1">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left tou" src="img/hao.png">
+						<div class="mui-media-body">
+							15133336666
+							<p class="mui-ellipsis">手机号:15133336666</p>
+						</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view ll">
+				<li class="mui-table-view-cell mui-media" id="lianxi">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/haoyou.png" style="border-radius: 50%;">
+						<div class="mui-media-body">我的好友</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media guanzhu">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/guanzhu.png" style="border-radius: 50%;">
+						<div class="mui-media-body">我的关注</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view ll">
+				<li class="mui-table-view-cell mui-media qianbao">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/qianbao.png" style="border-radius: 50%;">
+						<div class="mui-media-body">我的钱包</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media jiaoyi">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/jiaoyi.png" style="border-radius: 50%;">
+						<div class="mui-media-body">我的交易</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media call">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/women.png" style="border-radius: 50%;">
+						<div class="mui-media-body">联系我们</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media" id='ban'>
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/shebei.png" style="border-radius: 50%;">
+						<div class="mui-media-body">我的设备</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view ll1">
+				<li class="mui-table-view-cell mui-media bang" >
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="img/bang1.png" style="border-radius: 50%;">
+						<div class="mui-media-body">帮助中心</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			function refreshDown() {
+				setTimeout(function() {
+					//停止刷新
+					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+				}, 2000)
+			}
+			mui.init({
+				pullRefresh: {
+					container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: refreshDown //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			mui.plusReady(function() {
+				mui("#lianxi")[0].addEventListener("tap", function() {
+					mui.openWindow('lianxi.html', 'lianxi.html');
+
+				})
+
+				mui("#ban")[0].addEventListener("tap", function() {
+					function plusReady() {
+						alert("Device: " + plus.device.model);
+					}
+					plusReady();
+					document.addEventListener("plusready", plusReady, false);
+				})
+				
+				mui(".bang")[0].addEventListener("tap", function() {
+					mui.openWindow('bang.html', 'bang.html');
+				})
+				
+				mui(".call")[0].addEventListener("tap", function() {
+					plus.device.dial(15133336666, confirm )
+				})
+				
+				mui('.qianbao')[0].addEventListener('tap',function(){
+					alert('暂时没有钱')
+				})
+				mui('.guanzhu')[0].addEventListener('tap',function(){
+					alert('暂时没有关注的的项目')
+				})
+				mui('.jiaoyi')[0].addEventListener('tap',function(){
+					alert('暂时没有交易')
+				})
+				
+				mui('.shezhi')[0].addEventListener('tap',function(){
+					mui.openWindow('shezhi.html', 'shezhi.html');
+				})
+				
+				mui('.shezhi1')[0].addEventListener('tap',function(){
+					mui.openWindow('shezhi.html', 'shezhi.html');
+				})
+				
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view pic">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-right phot" src="img/hao.png">
+						<div class="mui-media-body">
+							<p class="tel">头像</p>
+						</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;" id="geng">
+						<span class="mui-pull-right s">心水</span>
+						<div class="mui-media-body">
+							<p class="tel geng" >更改昵称</p>
+						</div>
+					</a>
+					
+				</li>
+				<li class="mui-table-view-cell mui-media shouji" >
+					<a href="javascript:;">
+						<span class="mui-media-object mui-pull-right span1">15133336666</span>
+						<div class="mui-media-body">
+							<p class="tel">手机号</p>
+						</div>
+						<i class="mui-navigate-right"></i>
+					</a>
+				</li>
+
+			</ul>
+			<ul class="mui-table-view" id="dizhi">
+				<li class="mui-table-view-cell">
+					<a href="javascript:;" id="geng">
+						<span class="mui-pull-right s dizhi-s">点击获取你的当前位置</span>
+						<div class="mui-media-body">
+							<p class="tel geng" >我的当前位置</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell yinghang">
+					<a class="mui-navigate-right tel">
+						银行卡
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view about">
+			        <li class="mui-table-view-cell">
+			            <a class="mui-navigate-right tel">
+			                关于轻松投
+			            </a>
+			        </li>
+			        
+			    </ul>
+		</div>
+		<div class="mui-backdrop">
+			
+			<div class="inp">
+				请输入你要修改的内容：<input type="text" id="ipt"/>
+				<button class="submit">提交</button>
+				<button class="quxiao">取消</button>
+			</div>
+			
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			mui.plusReady(function(){
+				var aa=document.querySelector('.mui-backdrop');
+				var ipt=document.querySelector('#ipt');
+				var s=document.querySelector('.s');
+				var span=document.querySelector('.dizhi-s');
+				
+				if( plus.storage.getItem('src')  == null ){
+					mui('.phot')[0].src = 'img/hao.png';
+				}else{
+					mui('.phot')[0].src = plus.storage.getItem('src');
+				}
+//				if(s.innerHTML==''){
+//					s.innerHTML='心水'
+//				}else{
+//					s.innerHTML=ipt.value;
+//				}
+				mui('.phot')[0].addEventListener('tap',function(){
+					var cm = plus.camera.getCamera( 1 );
+					cm.captureImage(function(path){
+						mui('.phot')[0].src = "file://"+plus.io.convertLocalFileSystemURL(path);	
+						plus.storage.setItem("src","file://"+plus.io.convertLocalFileSystemURL(path));
+					});
+				})
+				
+				mui('#geng')[0].addEventListener('tap',function(){
+					aa.style.display='block';
+//					plus.nativeUI.prompt('请修改内容');// deprecated
+//					alert(prompt.value())
+				});
+				
+				mui('.shouji')[0].addEventListener('tap',function(){
+					plus.nativeUI.prompt('请输入您的手机号');// deprecated
+					alert(prompt.value())
+				});
+				
+				mui('#dizhi')[0].addEventListener('tap',function(){
+					 plus.geolocation.getCurrentPosition(function(data){
+					 	var da=JSON.stringify(data.address.city+" "+data.address.district+" "+data.address.street);
+					 	span.innerHTML=da
+					 })
+					 
+				});
+				
+				mui('.yinghang')[0].addEventListener('tap',function(){
+					plus.nativeUI.prompt('请添加您的银行卡');// deprecated
+					alert(prompt.value())
+				});
+				
+				mui('.submit')[0].addEventListener('tap',function(){
+					aa.style.display='none';
+					s.innerHTML=ipt.value;
+					ipt.value='';
+				})
+				mui('.about')[0].addEventListener('tap',function(){
+					
+					mui.openWindow('banben.html', 'banben.html');
+				});
+				
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">圈子</h1>
+		</header>
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+
+			<div class="mui-scroll">
+				<div class="mui-content quan mui-table-view-chevron">
+				    <dl title="暂时没有股东群" class="d1">
+				    	<dt class="mui-icon mui-icon-pengyouquan quan1"></dt>
+				    	<dd>我的股东群</dd>
+				    </dl>
+				    <dl  title="暂时没有讨论群" class="d1">
+				    	<dt class="mui-icon mui-icon-chat quan2"></dt>
+				    	<dd>我的讨论群</dd>
+				    </dl>
+				    <dl  title="暂时没有全部讨论群" class="d1">
+				    	<dt class="mui-icon mui-icon-contact quan3"></dt>
+				    	<dd>全部讨论群</dd>
+				    </dl>
+				</div>
+				<div class="p1">
+				</div>
+				
+			</div>
+			
+			
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			
+			function refreshDown() {
+				setTimeout(function(){
+				//停止刷新
+				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+				},2000)
+			}
+			mui.init({
+				pullRefresh: {
+					container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down: {
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: refreshDown //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
+			
+			mui.plusReady(function(){
+				var arr=[
+					"暂时没有股东群",
+					"暂时没有讨论群",
+					"暂时没有全部讨论群"
+				];
+			for(var i=0;i<mui('.d1').length;i++){
+					mui('.d1')[i].addEventListener('tap',function(){
+						var tit =this.getAttribute('title')
+//						alert(tit);
+						html=""
+						html+='<img src="img/gu.jpg" alt="" /><p>'+tit+'</p>';
+						mui('.p1')[0].innerHTML=html;
+					
+				})
+			}
+			
+			
+
+				
+
+			})
+		</script>
+	</body>
+
+</html>
